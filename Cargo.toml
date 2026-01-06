@@ -1,5 +1,5 @@
 [package]
-name = "typst-interactive"
+name = "tylighter"
 version = "0.1.0"
 edition = "2024"
 
@@ -11,8 +11,8 @@ typst-html = "0.14.2"
 comemo = "0.5.0"
 js-sys = "0.3.83"
 wasm-bindgen-futures = "0.4.56"
-# $env:RUSTFLAGS="-Zlocation-detail=none -Zfmt-debug=none"
-# cargo build -Z build-std=std,panic_abort -Z build-std-features="optimize_for_size,panic_immediate_abort" --release --target wasm32-unknown-unknown --features wasm-minimal-protocol --lib
+# $env.RUSTFLAGS = "-Zlocation-detail=none -Zfmt-debug=none -Zunstable-options -Cpanic=immediate-abort"
+# cargo +nightly build -Z build-std=std,panic_abort -Z build-std-features="optimize_for_size,panic_immediate_abort" --release --target wasm32-unknown-unknown
 
 [profile.release]
 lto = true          # Enable link-time optimization

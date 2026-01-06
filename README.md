@@ -17,14 +17,14 @@ There is a lot of things to improve and implement, but the goal is to keep the d
 To use it, simply download web bundle from releases, and import the code:
 
 ```js
-import init, { js_recompile, set_request_f, update_file, set_cache_size } from '.../typst-interactive.js';
+import init, { js_recompile, set_request_f, update_file, set_cache_size } from '.../tylighter.js';
 ```
 
 A very brief reference:
 
 
 - `init`: `await init()` is required before any usage due to need to initialize the WebAssembly.
-- After initialization, you should set `set_request_f((package_name: string, file_name: string) => Option<Uint8Array>)` for WebAssembly to be able to request you a file from a given package (may be empty) and a name. You may return null for it to panic first, but then you updating the file and call the recompiling manually.
+- After initialization, you should set `set_request_f((package_name: string, file_name: string) => Option<Uint8Array>)` for WebAssembly to be able to request you a file from a given package (may be empty) and a name. You may return null for it to panic first, but then you can update the file and call the recompiling manually.
 - If compiler requested a file, it now knows the way it needs to load it (raw binary, decoded to utf-8 or both). The main file, `main.typ`, is always known. After that, you may update the file contents with `update_file(package_name: string, file_name: string, data: Uint8Array)`.
   _if it sounds pretty bad for speed, it is, that leads to increased loading times while compiler requests all files it needs; I'm planning to improve it_
 - `js_recompile()` is a function that compiles a document with all file knowledge WebAssembly currently has, and returns a Results with raw html string and metadata string if succeeded, and an error span with `message` and `hints` otherwise.
