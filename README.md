@@ -7,7 +7,7 @@ Currently, it supports (from js via WASM):
 - Compiling Typst to _html_ with WASM on client
 - Setting any path for "file" your code might need with any data
 - Returning very simple error messages (return byte numbers instead of line numbers for now)
-- Set _memoization cache size_ (default: 20)
+- Set _memoization cache size_ (default: 10)
 - Set JS function for _requesting additional files from you_
 - Get metadata from compilation (currently only one with a fixed label `interact-var` is supported)
 - For rendering SVG currently uses built-in fonts only

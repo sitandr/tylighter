@@ -11,7 +11,7 @@ static WORLD: LazyLock<WebWorld> = LazyLock::new(|| {
     WebWorld::new()
 });
 
-static CACHE_SIZE: AtomicUsize = AtomicUsize::new(20);
+static CACHE_SIZE: AtomicUsize = AtomicUsize::new(10);
 
 static REQUEST_SOURCE: OnceLock<TrashUnsafeWrapper> = OnceLock::new();
 const METADATA_LABEL: PicoStr = PicoStr::constant("interact-var");
@@ -30,7 +30,6 @@ struct WebWorld {
     fonts: Vec<FontSlot>,
     book: LazyHash<FontBook>,
     files: Mutex<HashMap<FileId, FileSlot>>,
-
 }
 
 impl WebWorld {
@@ -212,7 +211,7 @@ pub fn update_file(package_name: String, file_name: String, data: Box<[u8]>) -> 
 }
 
 #[wasm_bindgen]
-pub async fn js_recompile() -> Result<CompileResult, Vec<ErrorSpan>> {
+pub fn js_recompile() -> Result<CompileResult, Vec<ErrorSpan>> {
     recompile_and_get_metadata().map_err(|e| e.iter().map(ErrorSpan::from_diagnostic).collect()).map(CompileResult::new)
 }
 
